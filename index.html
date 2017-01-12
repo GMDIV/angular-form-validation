@@ -1,5 +1,5 @@
 <!DOCTYPE html >
-<html lang="en" ng-app>
+<html lang="en" ng-app="minmax">
 <head >
 	<title >Data Binding and Form Validation</title >
 	<link href="./libs/bootstrap/dist/css/bootstrap.min.css"
@@ -22,13 +22,14 @@
 	</div>
 </nav>
 
-<div class="container main-content" ng-controller="MinMaxControl">
+<div class="container main-content" ng-controller="MinMaxCtrl">
 	<form>
 		<div class="form-group">
 			<label for="name">Name</label>
 			<input 
 				type="text"
 				class="form-control"
+				ng-model="formModel.name"
 				id="name">
 		</div>
 
@@ -37,6 +38,7 @@
 			<input 
 				type="email"
 				class="form-control"
+				ng-model="formModel.email"
 				id="email">
 		</div>
 
@@ -45,11 +47,18 @@
 			<input 
 				type="password"
 				class="form-control"
+				ng-model="formModel.password"
 				id="password">
 		</div>
+
+		<div class="form-group">
+			<button class="btn btn-primary">Register</button>
+		</div>
 	</form>
+	<pre>{{ formModel | json }}</pre>
 </div>
 <script src="./libs/angular/angular.min.js" ></script>
+<script src="./index.js" ></script>
 </body >
 </html >
 
