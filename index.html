@@ -23,7 +23,9 @@
 </nav>
 
 <div class="container main-content" ng-controller="MinMaxCtrl">
-	<form>
+	<form ng-submit="onSubmit(mainForm.valid())"
+		  name="mainForm"
+		  novalidate="novalidate">
 		<div class="form-group">
 			<label for="name">Name</label>
 			<input 
@@ -64,13 +66,27 @@
 			</select>
 		</div>
 
-		<div class="form-group">
+		<div class="form-group" ng-class="
+			{'has-error':!mainForm.email.$valid && (!mainForm.$pristine || mainForm.$submitted),
+			 'has-success':!mainForm.email.$valid && (!mainForm.$pristine || mainForm.$submitted)}
+		">
 			<label for="email">Email</label>
 			<input 
 				type="email"
 				class="form-control"
 				ng-model="formModel.email"
-				id="email">
+				id="email"
+				name="email">
+
+			<p class="help-block" ng-show="mainForm.email.$error.required && (!mainForm.$pristine || mainForm.$submitted)">
+			This field is required</p>
+			<p class="help-block" ng-show="mainForm.email.$error.email && (!mainForm.$pristine || mainForm.$submitted)"> 
+			Please enter an email with at least an @ symbol</p>
+
+			<pre>Validation {{ mainForm.email.$error | json}}</pre>
+			<pre>Field Valid? {{ mainForm.email.$valid}}</pre>
+			<pre>Form Pristine? {{mainForm.email.$pristine}}</pre>
+			<pre>Form Submitted? {{mainForm.$submitted}}</pre>
 		</div>
 
 		<div class="form-group">
@@ -86,7 +102,7 @@
 			<button class="btn btn-primary" ng-click="onSubmit()">Register</button>
 		</div>
 	</form>
-	<pre>{{ formModel | json }}</pre>
+	<pre>{{ mainForm | json }}</pre>
 </div>
 <script src="./libs/angular/angular.min.js" ></script>
 <script src="./index.js" ></script>
