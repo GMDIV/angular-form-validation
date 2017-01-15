@@ -19,6 +19,7 @@
   "homepage": "https://github.com/GMDIV/angular-form-validation#readme",
   "dependencies": {
     "angular": "^1.6.1",
+    "angular-auto-validate": "^1.19.0",
     "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",

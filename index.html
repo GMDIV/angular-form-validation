@@ -23,8 +23,8 @@
 </nav>
 
 <div class="container main-content" ng-controller="MinMaxCtrl">
-	<form ng-submit="onSubmit(mainForm.valid())"
-		  name="mainForm"
+	<form ng-submit="onSubmit()"
+		
 		  novalidate="novalidate">
 		<div class="form-group">
 			<label for="name">Name</label>
@@ -32,7 +32,8 @@
 				type="text"
 				class="form-control"
 				ng-model="formModel.name"
-				id="name">
+				id="name"
+				required="required">
 		</div>
 
 		<div class="form-group">
@@ -41,7 +42,11 @@
 				type="text"
 				class="form-control"
 				ng-model="formModel.username"
-				id="username">
+				ng-pattern="/^[A-Za-z0-9_]{1,32}$/"
+				ng-pattern-err-type="badUserName"
+				ng-minlength="7"
+				id="username"
+				required="required">
 		</div>
 
 		<div class="form-group">
@@ -50,7 +55,12 @@
 				type="number"
 				class="form-control"
 				ng-model="formModel.age"
-				id="age">
+				id="age"
+				required="required"
+				min="18"
+				max="99"
+				ng-min-err-type="toYoung"
+				ng-max-err-type="toOld">
 		</div>
 
 		<div class="form-group">
@@ -59,7 +69,8 @@
 				name="sex"
 				class="form-control"
 				ng-model="formModel.sex"
-				id="sex">
+				id="sex"
+				required="required">
 				<option value="">What gender are you?</option>
 				<option value="male">Male</option>
 				<option value="female">Female</option>
@@ -76,9 +87,10 @@
 				class="form-control"
 				ng-model="formModel.email"
 				id="email"
-				name="email">
+				name="email"
+				required="required">
 
-			<p class="help-block" ng-show="mainForm.email.$error.required && (!mainForm.$pristine || mainForm.$submitted)">
+		<!-- 	<p class="help-block" ng-show="mainForm.email.$error.required && (!mainForm.$pristine || mainForm.$submitted)">
 			This field is required</p>
 			<p class="help-block" ng-show="mainForm.email.$error.email && (!mainForm.$pristine || mainForm.$submitted)"> 
 			Please enter an email with at least an @ symbol</p>
@@ -86,7 +98,7 @@
 			<pre>Validation {{ mainForm.email.$error | json}}</pre>
 			<pre>Field Valid? {{ mainForm.email.$valid}}</pre>
 			<pre>Form Pristine? {{mainForm.email.$pristine}}</pre>
-			<pre>Form Submitted? {{mainForm.$submitted}}</pre>
+			<pre>Form Submitted? {{mainForm.$submitted}}</pre> -->
 		</div>
 
 		<div class="form-group">
@@ -95,7 +107,9 @@
 				type="password"
 				class="form-control"
 				ng-model="formModel.password"
-				id="password">
+				id="password"
+				required="required"
+				ng-minlength="8">
 		</div>
 
 		<div class="form-group">
@@ -105,6 +119,7 @@
 	<pre>{{ mainForm | json }}</pre>
 </div>
 <script src="./libs/angular/angular.min.js" ></script>
+<script src="./libs/angular-auto-validate/dist/jcs-auto-validate.min.js" ></script>
 <script src="./index.js" ></script>
 </body >
 </html >
