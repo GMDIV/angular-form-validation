@@ -1,5 +1,6 @@
 var app = angular.module('minmax', [
-   'jcs-autoValidate'
+   'jcs-autoValidate',
+   'angular-ladda'
 
 ]);
 
@@ -12,14 +13,16 @@ app.run(function(defaultErrorMessageResolver){
 });
 app.controller('MinMaxCtrl', function($scope){
 	$scope.formModel = {};
+	$scope.submitting = false;
 
 	$scope.onSubmit = function(){
-	
+		$scope.submitting = true;
+
 		
 			console.log("The submit button has been clicked!");
 			console.log($scope.formModel);
 		
-
+			//insert $http requests/api destination here instead of just the console logs 
 	}
 	
 })
